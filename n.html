@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layout</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,700,900&display=swap" rel="stylesheet">
+    <style>
+        *, *::after, *::before {box-sizing: border-box;}
+        :root {font-size: 20px;
+              }
+       body {
+            margin: 0;
+            --color-text : #dc6e25;
+            --color-link : #0455cd;
+            --color-bg : #2e2f2f;
+            --imgwidthmax: 600px;
+            --aspect-ratio: 32/17;
+            color: var(--color-link);
+            background-color: var(--color-bg);
+            font-family: 'Lato', sans-serif;;
+        }
+        .infor {
+            position: fixed; right: 10px; top: 10px; z-index: 1000;
+            background: rgba(0,0,0,.3);
+            color: #fff;
+            padding: 20px;
+            font-size: 14px; line-height: 1.4;
+            text-align: right;
+        }
+        #wrap h1 {
+            font-size: 5rem;
+            padding: 3rem;
+            color: var(--color-text);
+        }
+        
+        .content-item { 
+            --imgwidth: calc(var(--imgwidthmax) * var(--aspect-ratio));
+            width: var(--imgwidth);
+            position: relative;
+            will-change: transform;
+        }
+        .content-item:nth-child(even){
+            margin-left: auto;
+        }
+        .content-item-num {
+            position: absolute; top: 30%; right: 10vw; transform: translateY(-60%);
+           font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 20vw; opacity: 4; line-height: 1;
+            font-weight: 100; 
+            color: #c4d1d2;
+            opacity: 2; /* initial state: fully visible */
+            transform: translateY(0); /* initial state: no translation */
+            animation: pop-down-fade 10s forwards; 
+        }
+            @keyframes popup-fade {
+                0% {
+                  transform: translateY(-20px);
+                  opacity: 0;
+                }
+                50% {
+                  transform: translateY(0);
+                  opacity: 1;
+                }
+                100% {
+                  transform: translateY(20px);
+                  opacity: 0;
+                }
+        }
+        .content-item-title {
+            text-align: right; font-weight: 600; text-transform: capitalize;
+            color: #c9ce26; padding-right: 30px;
+            font-size: xx-large; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .content-item-imgWrap {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            --imgwidth: 50%;
+            overflow: hidden;
+            margin: 0 10vw 0 10vw;
+            width: var(--imgwidth); 
+            padding-top: calc(var(--imgwidth) / (var(--aspect-ratio)));
+            will-change: transform;
+            
+        }
+        
+        .content-item-img {
+            --overflow: 40px;
+            height: calc(100% + (4 * var(--overflow)));
+            position: absolute;
+            top: calc( -1 * var(--overflow));
+            width: 50%;
+            background-size: cover;
+            background-position: 50% 0;
+            will-change: transform;
+            opacity: 2; /* initial state: fully visible */
+            transform: translateY(0); /* initial state: no translation */
+            animation: pop-down-fade 35s forwards; /* two animations: pop-down-fade and reappear */
+    
+         
+          }
+            @keyframes pop-down-fade {
+            0% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+            50% {
+              opacity: 1;
+              transform: translateY(-20px); /* pop down effect */
+            }
+            100% {
+              opacity: 0;
+              transform: translateY(20px); /* final state: translated down*/
+            }
+        }
+        .content-item-desc {
+            position: fixed;
+            top: 60vh;
+            right: 10vw;
+            margin: -1;
+            font-size: 5vw;
+            line-height: 1.2;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #f6fcf9;
+            text-align: right;
+            word-break: keep-all;
+            z-index: -10;
+            opacity: 1; /* initial state: invisible */
+            animation: popup-fade 35s forwards; /* animation name, duration, and iteration count */
+          }
+          
+          @keyframes popup-fade {
+            0% {
+              transform: translateY(-20px);
+              opacity: 0;
+            }
+            50% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(20px);
+              opacity: 0;
+            }
+          
+        }
+       /* CSS */
+        .video-background {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100vh;
+         z-index: -1;
+        }
+  
+        .video-background video {
+          width: 100%;
+         height: 100%;
+         object-fit: cover;
+        }
+        
+        .contents { 
+            position:fixed; width: 900vw; margin: 0; height: 100vh;
+        }
+        .contents > section {width: 100vw; float: left; height: 100vh; }
+/*
+        .contents > section:nth-child(1) {background: #999;}
+        .contents > section:nth-child(2) {background: #888;}
+        .contents > section:nth-child(3) {background: #777;}
+        .contents > section:nth-child(4) {background: #666;}
+        .contents > section:nth-child(5) {background: #555;}
+        .contents > section:nth-child(6) {background: #444;}
+        .contents > section:nth-child(7) {background: #333;}
+        .contents > section:nth-child(8) {background: #222;}
+        .contents > section:nth-child(9) {background: #111;}
+*/
+        .infor {
+            position: fixed; right: 10px; top: 10px; z-index: 1000;
+            background: rgba(0,0,0,.3);
+            color: #fff;
+            padding: 20px;
+            font-size: 14px; line-height: 1.4;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- HTML -->
+ <div class="video-background">
+    <video autoplay loop muted>
+      <source src="f.mp4" type="video/mp4">
+    </video>
+  </div>
+    <div id="wrap">
+<!--        <h1>Parallax Scrolling</h1>-->
+        <div class="contents">
+            <section id="section1" class="content-item">
+                <span class="content-item-num">01</span>
+                <h2 class="content-item-title">Iron Hill</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img">
+                         <a href="https://ironhillindia.com/">
+                            <img src="ironhill.jpeg" style="border: 4px solid;border-image: conic-gradient(from 0deg, #edf3f0, #ffffff) 1;">
+                         </a>
+                    </div>
+                </div>
+                <p class="content-item-desc ", style="font-family: 'Courier New', Courier, monospace;"> the world's best brewery in banglore</p>
+            
+            </section>
+            <section id="section2" class="content-item">
+                <span class="content-item-num">02</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section3" class="content-item">
+                <span class="content-item-num">03</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section4" class="content-item">
+                <span class="content-item-num">04</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section5" class="content-item">
+                <span class="content-item-num">05</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section6" class="content-item">
+                <span class="content-item-num">06</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section7" class="content-item">
+                <span class="content-item-num">07</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section8" class="content-item">
+                <span class="content-item-num">08</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+            <section id="section9" class="content-item">
+                <span class="content-item-num">09</span>
+                <h2 class="content-item-title">advice</h2>
+                <div class="content-item-imgWrap">
+                    <div class="content-item-img"></div>
+                </div>
+                <p class="content-item-desc"></p>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script>
+        var lastScrollTop = 0;							//현재 스크롤 값(제일 마지막 스크롤 값)
+        var roadLength = $(".contents").width();		//전체 가로 값
+        $("body").css("height", roadLength);		    //전체 세로 값은 width 전체 값을 할당
+        
+        
+        $(window).scroll(function(){
+            var wScroll = $(window).scrollTop();
+            var wWidth = $(window).width();								//현재 화면의 가로 값
+            var wHeight = $(window).height();							//현재 화면의 세로 값
+            var dHeight = $("body").height() - wHeight;		            //전체 세로 값 - 현재 화면의 새로 값
+            var wRoad = roadLength - wWidth;							//전체 가로 값 - 현재 화면의 가로 값
+            var step = wRoad/dHeight;								    //전체 가로 값 / 전체 세로 값
+            var goLeft = wScroll * step;
+            
+            $(".contents").css({ "transform":"translateX(-"+ goLeft +"px )" });
+            
+            lastScrollTop = wScroll;
+            
+            $(".wScroll").text(wScroll);
+            $(".wWidth").text(wWidth);
+            $(".wHeight").text(wHeight);
+            $(".dHeight").text(dHeight);
+            $(".wRoad").text(wRoad);
+            $(".step").text(parseInt(step));
+            $(".goLeft").text(parseInt(goLeft));
+            
+            
+            let offset1 = parseInt((wScroll - goLeft) * 2);
+            
+            //alert($("#section2").offset().left);
+            
+            $("#section1 .content-item-desc").css({ "transform" : "translateX("+ -offset1 +"px)" });
+            $("#section2 .content-item-desc").css({ "transform" : "translateX("+ -offset1 +"px)" });
+            $("#section3 .content-item-desc").css({ "transform" : "translateX("+ -offset1 +"px)" });
+            
+            $(document).keydown(function(e){
+                if(e.which == 39){
+                    var scrollTop = $(document).scrollTop();
+                    $(window).scrollTop(scrollTop + 50);
+                }
+                if(e.which == 37){
+                    var scrollTop = $(document).scrollTop();
+                    $(window).scrollTop(scrollTop - 50);
+                }
+            });
+            
+            if( $(window).scrollTop() > $("#section4").offset().top - $(window).height()/2  ){ 
+                $("#section4").addClass("show")
+            }  
+            if( $(window).scrollTop() > $("#section5").offset().top - $(window).height()/2  ){ 
+                $("#section5").addClass("show")
+            }  
+            
+        });
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
